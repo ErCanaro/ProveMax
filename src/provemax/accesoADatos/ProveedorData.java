@@ -154,7 +154,7 @@ public class ProveedorData {
                 proveedor.setTelefono(rs.getString("telefono"));
                 proveedor.setEstado(rs.getBoolean("estado"));
                 
-                System.out.println(proveedor);
+                //System.out.println(proveedor);
             } else {
                 JOptionPane.showMessageDialog(null, "No se econtró un porveedor con este ID");
             }
@@ -168,29 +168,6 @@ public class ProveedorData {
         return proveedor;
     }
     
-    
-     public Proveedor buscarProveedorID(int idProv) {
-        String sql = "SELECT * FROM proveedor WHERE idProveedor =  ?";
 
-        Proveedor Proveedor = null;
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, idProv);
-            ps.executeQuery();
-
-            ResultSet rs = ps.getResultSet();
-            if (rs.next()) {
-                Proveedor = new Proveedor(rs.getInt("idProveedor"), rs.getString("razonSocial"), rs.getString("domicilio"), rs.getString("telefono"), rs.getBoolean("estado"));
-            } else {
-                JOptionPane.showMessageDialog(null, "No existe un Proveedor con el ID " + idProv);
-            }
-            ps.close();
-            System.out.println(Proveedor);
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al conectar con la tabla alumno");
-        }
-        return Proveedor;
-    }
     
 }

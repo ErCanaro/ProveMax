@@ -5,8 +5,10 @@
  */
 package provemax;
 
+import provemax.accesoADatos.CompraData;
+import provemax.accesoADatos.ProductoData;
 import provemax.accesoADatos.ProveedorData;
-import provemax.entidades.Proveedor;
+import provemax.entidades.Producto;
 
 /**
  *
@@ -20,13 +22,21 @@ public class ProveMax {
     public static void main(String[] args) {
         //Proveedor p = new Proveedor("La Estrella", "Via Láctea", "03 03 456", true);
         
-        ProveedorData pvdData = new ProveedorData();
+        //ProveedorData pvdData = new ProveedorData();
+        //ProductoData prodData = new ProductoData();
+        CompraData compraData = new CompraData();
         
 //        pvdData.buscarProveedorPorId(9);
+//
+//        for (Proveedor p : pvdData.listarProveedores()){
+//            System.out.println(p);
+//        }
 
-        for (Proveedor p : pvdData.listarProveedores()){
-            System.out.println(p);
-        }
+//        for (Producto p : prodData.buscarProductoPorDescripcionContiene("ORA")) {
+//            System.out.println(p);
+//        }
+
+        System.out.println(compraData.buscarCompraPorId(1));
         
     }
     
