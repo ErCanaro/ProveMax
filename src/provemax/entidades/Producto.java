@@ -16,26 +16,31 @@ public class Producto {
     private double precioActual;
     private int stock;
     private boolean estado;
+    private int stockMinimo;
 
     public Producto() {
     }
 
-    public Producto(String nombre, String descripcion, double precioActual, int stock, boolean estado) {
+    public Producto(String nombre, String descripcion, double precioActual, int stock, boolean estado, int stockMinimo) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precioActual = precioActual;
         this.stock = stock;
         this.estado = estado;
+        this.stockMinimo = stockMinimo;
     }
 
-    public Producto(int idProducto, String nombre, String descripcion, double precioActual, int stock, boolean estado) {
+    public Producto(int idProducto, String nombre, String descripcion, double precioActual, int stock, boolean estado, int stockMinimo) {
         this.idProducto = idProducto;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precioActual = precioActual;
         this.stock = stock;
         this.estado = estado;
+        this.stockMinimo = stockMinimo;
     }
+
+  
 
     public int getIdProducto() {
         return idProducto;
@@ -85,10 +90,21 @@ public class Producto {
         this.estado = estado;
     }
 
+    public int getStockMinimo() {
+        return stockMinimo;
+    }
+
+    public void setStockMinimo(int stockMinimo) {
+        this.stockMinimo = stockMinimo;
+    }
+
     @Override
     public String toString() {
-        return "Producto{" + "idProducto=" + idProducto + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precioActual=" + precioActual + ", stock=" + stock + ", estado=" + estado + '}';
+        return "Producto{" + "idProducto=" + idProducto + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precioActual=" + precioActual + ", stock=" + stock + ", estado=" + estado + ", stockMinimo=" + stockMinimo + '}';
     }
+    
+    
+
     
     
 }

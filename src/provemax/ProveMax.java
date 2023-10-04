@@ -5,9 +5,7 @@
  */
 package provemax;
 
-import provemax.accesoADatos.CompraData;
 import provemax.accesoADatos.ProductoData;
-import provemax.accesoADatos.ProveedorData;
 import provemax.entidades.Producto;
 
 /**
@@ -23,20 +21,38 @@ public class ProveMax {
         //Proveedor p = new Proveedor("La Estrella", "Via Láctea", "03 03 456", true);
         
         //ProveedorData pvdData = new ProveedorData();
-        //ProductoData prodData = new ProductoData();
-        CompraData compraData = new CompraData();
+        ProductoData prodData = new ProductoData();
+        for (Producto p : prodData.listaProductosConStockMenorAlMinimo()) {
+            System.out.println(p);
+        }
+        //CompraData compraData  =  new CompraData();
+       //Producto producto = new Producto("Juguera", "Hace jugo", 12536.84, 18, true);
+//        System.out.println(compraData.buscarCompraPorId(1));
         
+        //CompraData compraData = new CompraData();
+        //Proveedor prove = pvdData.buscarProveedorPorId(1);
+        //Compra comprita = new Compra(prove, LocalDate.of(2023,10,1));
+        
+       
+       
+        //System.out.println(comprita);
 //        pvdData.buscarProveedorPorId(9);
 //
 //        for (Proveedor p : pvdData.listarProveedores()){
 //            System.out.println(p);
 //        }
 
-//        for (Producto p : prodData.buscarProductoPorDescripcionContiene("ORA")) {
+//        System.out.println(prodData.buscarProductoPorNombreCompleto("Juguera"));
+//        for (Producto p : prodData.buscarProductoPorNombreContiene("rod")) {
 //            System.out.println(p);
 //        }
 
-        System.out.println(compraData.buscarCompraPorId(1));
+//        for (Producto p : prodData.buscarProductoPorDescripcionContiene("ora")){
+//            System.out.println(p);
+//        }
+            
+        
+        //System.out.println(compraData.buscarCompraPorId(1));
         
     }
     

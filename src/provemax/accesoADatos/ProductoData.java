@@ -40,6 +40,7 @@ public class ProductoData {
                 producto.setPrecioActual(rs.getDouble("precioActual"));
                 producto.setStock(rs.getInt("stock"));
                 producto.setEstado(rs.getBoolean("estado"));
+                producto.setStockMinimo(rs.getInt("stockMinimo"));
             }else {
                 JOptionPane.showMessageDialog(null, "No existe un producto con el ID " + idProducto);
             }
@@ -51,14 +52,14 @@ public class ProductoData {
         return producto;
     }
     
-    public List<Producto> buscarProductoPorNombreCompleto(String idProducto) {
+    public List<Producto> buscarProductoPorNombreCompleto(String nombre) {
         
         ArrayList<Producto> listaProductos = new ArrayList<>();
         String sql =  "SELECT * from producto WHERE nombre = ?";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, idProducto);
+            ps.setString(1, nombre);
             
             ResultSet rs = ps.executeQuery();
             
@@ -70,6 +71,7 @@ public class ProductoData {
                 producto.setPrecioActual(rs.getDouble("precioActual"));
                 producto.setStock(rs.getInt("stock"));
                 producto.setEstado(rs.getBoolean("estado"));
+                producto.setStockMinimo(rs.getInt("stockMinimo"));
                 
                 listaProductos.add(producto);
             }
@@ -88,7 +90,7 @@ public class ProductoData {
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, "%"+nombre+"%");
+            ps.setString(1, "%"+nombre+"%"); // LIKE %ora%
             
             ResultSet rs = ps.executeQuery();
             
@@ -100,6 +102,7 @@ public class ProductoData {
                 producto.setPrecioActual(rs.getDouble("precioActual"));
                 producto.setStock(rs.getInt("stock"));
                 producto.setEstado(rs.getBoolean("estado"));
+                producto.setStockMinimo(rs.getInt("stockMinimo"));
                 
                 listaProductos.add(producto);
 
@@ -132,6 +135,7 @@ public class ProductoData {
                 producto.setPrecioActual(rs.getDouble("precioActual"));
                 producto.setStock(rs.getInt("stock"));
                 producto.setEstado(rs.getBoolean("estado"));
+                producto.setStockMinimo(rs.getInt("stockMinimo"));
                 
                 listaProductos.add(producto);
 
@@ -146,8 +150,8 @@ public class ProductoData {
     }
     
     public void altaProducto(Producto producto) {
-        String sql = "INSERT INTO producto (nombre, descripcion, precioActual, stock, estado)"
-                + " VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO producto (nombre, descripcion, precioActual, stock, estado, stockMinimo)"
+                + " VALUES (?,?,?,?,?,?)";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -156,6 +160,7 @@ public class ProductoData {
             ps.setDouble(3, producto.getPrecioActual());
             ps.setInt(4, producto.getStock());
             ps.setBoolean(5, producto.isEstado());
+            ps.setInt(6, producto.getStockMinimo());
             ps.executeUpdate();
             
             ResultSet rs = ps.getGeneratedKeys();
@@ -213,7 +218,7 @@ public class ProductoData {
     }
     
     public void modificarProdcuto(Producto producto) {
-        String sql =  "UPDATE producto SET nombre = ?, descripcion = ?, precioActual = ?, stock = ? WHERE idProducto = ?";
+        String sql =  "UPDATE producto SET nombre = ?, descripcion = ?, precioActual = ?, stock = ? , stockMinimo = ? WHERE idProducto = ?";
         
         
         try {
@@ -222,7 +227,9 @@ public class ProductoData {
             ps.setString(2, producto.getDescripcion());
             ps.setDouble(3, producto.getPrecioActual());
             ps.setInt(4, producto.getStock());
-            ps.setInt(5, producto.getIdProducto());
+            ps.setInt(5, producto.getStockMinimo());
+            ps.setInt(6, producto.getIdProducto());
+            
             
             int modificado = ps.executeUpdate();
             
@@ -236,6 +243,36 @@ public class ProductoData {
         }
     }
         
+    
+    public List<Producto> listaProductosConStockMenorAlMinimo(){
+        ArrayList<Producto> listaProductos = new ArrayList<>();
         
+        String sql = "SELECT * FROM producto WHERE stock < stockMinimo";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()){
+                Producto producto = new Producto();
+                producto.setIdProducto(rs.getInt("idProducto"));
+                producto.setNombre(rs.getString("nombre"));
+                producto.setDescripcion(rs.getString("descripcion"));
+                producto.setPrecioActual(rs.getDouble("precioActual"));
+                producto.setStock(rs.getInt("stock"));
+                producto.setEstado(rs.getBoolean("estado"));
+                producto.setStockMinimo(rs.getInt("stockMinimo"));
+                
+                listaProductos.add(producto);
+            }
+            ps.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al conectar con la tabla Producto");
+        }
+        
+        return listaProductos;
+    }
     
 }
