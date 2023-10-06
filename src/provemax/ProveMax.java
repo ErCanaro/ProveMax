@@ -5,10 +5,8 @@
  */
 package provemax;
 
-import java.time.LocalDate;
-import java.util.Map;
-import provemax.accesoADatos.DetalleCompraData;
-import provemax.entidades.Producto;
+import provemax.accesoADatos.ProveedorData;
+import provemax.entidades.Proveedor;
 
 /**
  *
@@ -58,17 +56,26 @@ public class ProveMax {
         
         
         
-        DetalleCompraData dcd = new DetalleCompraData();
-        
-//        for (Producto p : dcd.listaProductosPorFecha(LocalDate.of(2023,10, 1))){
-//            System.out.println(p);
+//        DetalleCompraData dcd = new DetalleCompraData();
+//        
+////        for (Producto p : dcd.listaProductosPorFecha(LocalDate.of(2023,10, 1))){
+////            System.out.println(p);
+////        }
+//        
+//        for (Map.Entry<Producto, Integer> pv : dcd.listaProductosMasCompradoEntre(LocalDate.of(2023,10,1), LocalDate.of(2023,10,6)).entrySet()){
+//             System.out.println(pv.getKey().getNombre() + "  =  " + pv.getValue());
 //        }
-        
-        for (Map.Entry<Producto, Integer> pv : dcd.listaProductosMasCompradoEntre(LocalDate.of(2023,10,1), LocalDate.of(2023,10,6)).entrySet()){
-             System.out.println(pv.getKey().getNombre() + "  =  " + pv.getValue());
-        }
+
+    ProveedorData pdat = new ProveedorData();
+    
+    Proveedor p = new Proveedor(10,"ZZ", "AA", "134", true);
+   
+    pdat.modificarProveedor(p);
+
+
 
     }
+    
     
     
 }

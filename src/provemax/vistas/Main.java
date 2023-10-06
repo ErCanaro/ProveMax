@@ -27,21 +27,107 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDPEscritorio = new javax.swing.JDesktopPane();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenuProveedor = new javax.swing.JMenu();
+        jMenuItemProveedor = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(810, 630));
+
+        jDPEscritorio.setPreferredSize(new java.awt.Dimension(800, 600));
+
+        javax.swing.GroupLayout jDPEscritorioLayout = new javax.swing.GroupLayout(jDPEscritorio);
+        jDPEscritorio.setLayout(jDPEscritorioLayout);
+        jDPEscritorioLayout.setHorizontalGroup(
+            jDPEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 800, Short.MAX_VALUE)
+        );
+        jDPEscritorioLayout.setVerticalGroup(
+            jDPEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 600, Short.MAX_VALUE)
+        );
+
+        jMenuProveedor.setText("Administrar");
+        jMenuProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuProveedorActionPerformed(evt);
+            }
+        });
+
+        jMenuItemProveedor.setText("Proveedores...");
+        jMenuItemProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemProveedorActionPerformed(evt);
+            }
+        });
+        jMenuProveedor.add(jMenuItemProveedor);
+
+        jMenuItem1.setText("Proveeeeeedores...");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenuProveedor.add(jMenuItem1);
+
+        jMenuItem2.setText("Productos...");
+        jMenuProveedor.add(jMenuItem2);
+
+        jMenuBar1.add(jMenuProveedor);
+
+        jMenu2.setText("Compras");
+
+        jMenuItem3.setText("Realizar Compra");
+        jMenu2.add(jMenuItem3);
+
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Consultas");
+        jMenuBar1.add(jMenu3);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 687, Short.MAX_VALUE)
+            .addComponent(jDPEscritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 497, Short.MAX_VALUE)
+            .addComponent(jDPEscritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuProveedorActionPerformed
+       
+    }//GEN-LAST:event_jMenuProveedorActionPerformed
+
+    private void jMenuItemProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemProveedorActionPerformed
+       jDPEscritorio.removeAll();
+       jDPEscritorio.repaint();
+       VistaProveedor vp = new VistaProveedor();
+       vp.setVisible(true);
+       jDPEscritorio.add(vp);
+       jDPEscritorio.moveToFront(vp);
+    }//GEN-LAST:event_jMenuItemProveedorActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+       jDPEscritorio.removeAll();
+       jDPEscritorio.repaint();
+       VistaProveedor2 vp = new VistaProveedor2();
+       vp.setVisible(true);
+       jDPEscritorio.add(vp);
+       jDPEscritorio.moveToFront(vp);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +165,14 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDesktopPane jDPEscritorio;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItemProveedor;
+    private javax.swing.JMenu jMenuProveedor;
     // End of variables declaration//GEN-END:variables
 }
