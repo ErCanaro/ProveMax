@@ -275,4 +275,35 @@ public class ProductoData {
         return listaProductos;
     }
     
+    
+    public List<Producto> listaProductos(){
+        ArrayList<Producto> listaProductos = new ArrayList<>();
+        
+        String sql = "SELECT * FROM producto";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()){
+                Producto producto = new Producto();
+                producto.setIdProducto(rs.getInt("idProducto"));
+                producto.setNombre(rs.getString("nombre"));
+                producto.setDescripcion(rs.getString("descripcion"));
+                producto.setPrecioActual(rs.getDouble("precioActual"));
+                producto.setStock(rs.getInt("stock"));
+                producto.setEstado(rs.getBoolean("estado"));
+                producto.setStockMinimo(rs.getInt("stockMinimo"));
+                
+                listaProductos.add(producto);
+            }
+            ps.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al conectar con la tabla Producto");
+        }
+        
+        return listaProductos;
+    }
 }

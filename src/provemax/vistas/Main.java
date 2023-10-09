@@ -5,6 +5,8 @@
  */
 package provemax.vistas;
 
+import javax.swing.JDesktopPane;
+
 /**
  *
  * @author Enzo Bulacio
@@ -38,7 +40,6 @@ public class Main extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(810, 630));
 
         jDPEscritorio.setPreferredSize(new java.awt.Dimension(800, 600));
 
@@ -52,6 +53,8 @@ public class Main extends javax.swing.JFrame {
             jDPEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 600, Short.MAX_VALUE)
         );
+
+        jMenuBar1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
 
         jMenuProveedor.setText("Administrar");
         jMenuProveedor.addActionListener(new java.awt.event.ActionListener() {
@@ -77,6 +80,11 @@ public class Main extends javax.swing.JFrame {
         jMenuProveedor.add(jMenuItem1);
 
         jMenuItem2.setText("Productos...");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenuProveedor.add(jMenuItem2);
 
         jMenuBar1.add(jMenuProveedor);
@@ -84,6 +92,11 @@ public class Main extends javax.swing.JFrame {
         jMenu2.setText("Compras");
 
         jMenuItem3.setText("Realizar Compra");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem3);
 
         jMenuBar1.add(jMenu2);
@@ -105,6 +118,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuProveedorActionPerformed
@@ -128,6 +142,24 @@ public class Main extends javax.swing.JFrame {
        jDPEscritorio.add(vp);
        jDPEscritorio.moveToFront(vp);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+       jDPEscritorio.removeAll();
+       jDPEscritorio.repaint();
+       VistaProducto vp = new VistaProducto();
+       vp.setVisible(true);
+       jDPEscritorio.add(vp);
+       jDPEscritorio.moveToFront(vp);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+       jDPEscritorio.removeAll();
+       jDPEscritorio.repaint();
+       VistaCompra vc = new VistaCompra();
+       vc.setVisible(true);
+       jDPEscritorio.add(vc);
+       jDPEscritorio.moveToFront(vc);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -155,13 +187,19 @@ public class Main extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+//        try {
+//            FlatArcIJTheme.setup();
+//        } catch (Exception ex) {
+//            System.err.println("Failed to initialize LaF");
+//        }
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Main().setVisible(true);
             }
         });
+
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -175,4 +213,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemProveedor;
     private javax.swing.JMenu jMenuProveedor;
     // End of variables declaration//GEN-END:variables
+
+    public JDesktopPane getjDPEscritorio() {
+        return jDPEscritorio;
+    }
+    
 }

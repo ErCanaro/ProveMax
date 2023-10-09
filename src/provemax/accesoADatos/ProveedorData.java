@@ -101,7 +101,7 @@ public class ProveedorData {
             int modificado = ps.executeUpdate();
             
             if (modificado == 1) {
-                JOptionPane.showMessageDialog(null, "El Proveedor con el ID "+ idProveedor + " ha sido borrado");
+                JOptionPane.showMessageDialog(null, "El Proveedor con el ID "+ idProveedor + " ha sido restaurado");
             }
             ps.close();
         } catch (SQLException ex) {
