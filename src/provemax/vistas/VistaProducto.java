@@ -564,6 +564,7 @@ public class VistaProducto extends javax.swing.JInternalFrame {
             modeloTabla.addRow(new Object [] {p.getIdProducto(), p.getNombre(), p.getDescripcion(), p.getPrecioActual(),p.getStock()});
         }
          jTProductos.setModel(modeloTabla);
+         jTProductos.setAutoCreateRowSorter(true);
          jTProductos.getColumnModel().getColumn(0).setPreferredWidth(25);
          jTProductos.getColumnModel().getColumn(1).setPreferredWidth(100);
          jTProductos.getColumnModel().getColumn(2).setPreferredWidth(135);
