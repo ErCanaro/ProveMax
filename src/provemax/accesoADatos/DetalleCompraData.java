@@ -22,14 +22,13 @@ public class DetalleCompraData {
     private CompraData compraData = new CompraData();
     private ProductoData prodData = new ProductoData();
     private ProveedorData provData = new ProveedorData();
-
     public DetalleCompraData() {
         con =  Conexion.getConexion();
     }
     
     //Alta Detalle
     public void altaDetalle(DetalleCompra detalle){
-        String sql =  "INSET INTO detallecompra (cantidad, precioCosto, idCompra, idProducto)"
+        String sql =  "INSERT INTO detallecompra (cantidad, precioCosto, idCompra, idProducto)"
                 + "VALUES (?,?,?,?)";
         
         try {
@@ -113,21 +112,80 @@ public class DetalleCompraData {
                 detalleCompra.setIdDetalle(rs.getInt("idDetalle"));
                 detalleCompra.setCantidad(rs.getInt("cantidad"));
                 detalleCompra.setPrecioCosto(rs.getDouble("precioCosto"));
-                detalleCompra.setProducto(prodData.buscarProductoPorId(rs.getInt(rs.getInt("idProducto"))));
+                detalleCompra.setProducto(prodData.buscarProductoPorId(rs.getInt("idProducto")));
                 detalleCompra.setCompra(compraData.buscarCompraPorId(rs.getInt("idCompra")));
             }
             ps.close();
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al conectar con la tabla DetalleCompra");
+            JOptionPane.showMessageDialog(null, "Error al conectar con la tabla DetalleCompra {Buscar DETALLA POR ID}");
         }
         return detalleCompra;
     }
-    //Lista de Productos x Fecha
-    public List<Producto> listaProductosPorFecha(LocalDate fecha) {
-        ArrayList<Producto> listaProductos = new ArrayList<>();
-        
-        String sql = "SELECT * FROM detallecompra dc JOIN compra ON dc.idCompra=compra.idCompra WHERE fecha = ?";
+//    //Lista de Productos x Fecha
+//    public List<Double[]> listaProductosPorFecha(LocalDate fecha) {
+//        ArrayList<Double[]> listaDetalleCompras = new ArrayList<>();
+//        String sql = "SELECT producto.idProducto,SUM(cantidad) AS cantidadTotal," 
+//                + "AVG(precioCosto) AS 'precioPromedio' ,SUM(stock+cantidad) AS stockTotal " 
+//                + "FROM detallecompra dc JOIN compra ON dc.idCompra=compra.idCompra " 
+//                + "JOIN producto ON dc.idProducto=producto.idProducto WHERE fecha = ? "
+//                + "GROUP BY dc.idProducto";
+//        
+//        try {
+//            PreparedStatement ps = con.prepareStatement(sql);
+//            ps.setDate(1, Date.valueOf(fecha));
+//            
+//            ResultSet rs = ps.executeQuery();
+//                                   
+//            while (rs.next()) {
+//                Double[] datos = {rs.getDouble("idProducto") , rs.getDouble("cantidadTotal"), rs.getDouble("precioPromedio"), rs.getDouble("stockTotal")};
+//                                
+//                listaDetalleCompras.add(datos);
+//            }
+//            ps.close();
+//            
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "Error al conectar con la tabla DetalleCompra" + ex);
+//        }
+//        return listaDetalleCompras;
+//    }
+//    
+//    public List<DetalleCompra> listaProductosPorFecha2(LocalDate fecha) {
+//        ArrayList<DetalleCompra> listaDetalleCompras = new ArrayList<>();
+//        
+//        String sql = "SELECT * FROM detallecompra dc JOIN compra ON dc.idCompra=compra.idCompra WHERE fecha = ?";
+//        
+//        try {
+//            PreparedStatement ps = con.prepareStatement(sql);
+//            ps.setDate(1, Date.valueOf(fecha));
+//            
+//            ResultSet rs = ps.executeQuery();
+//                                   
+//            while (rs.next()) {
+//                DetalleCompra detalleCompra = new DetalleCompra();
+//                
+//                detalleCompra.setProducto(prodData.buscarProductoPorId(rs.getInt("idProducto")));
+//                detalleCompra.setCantidad(rs.getInt("cantidad"));
+//                detalleCompra.setPrecioCosto(rs.getDouble("precioCosto"));
+//                detalleCompra.setCompra(compraData.buscarCompraPorId(rs.getInt("idCompra")));
+//                detalleCompra.setIdDetalle(rs.getInt("idDetalleCompra"));
+//                
+//                listaDetalleCompras.add(detalleCompra);
+//            }
+//            ps.close();
+//            
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "Error al conectar con la tabla DetalleCompra");
+//        }
+//        return listaDetalleCompras;
+//    }
+    
+     //Lista de Productos x Fecha
+    public List<Double[]> listaProductosPorFecha(LocalDate fecha) {
+        ArrayList<Double[]> listaProductos = new ArrayList<>();
+        String sql = "SELECT producto.idProducto, compra.idProveedor, cantidad, precioCosto "
+                + "FROM detallecompra dc JOIN compra ON dc.idCompra=compra.idCompra "
+                + "JOIN producto ON dc.idProducto=producto.idProducto WHERE fecha = ?";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -136,19 +194,20 @@ public class DetalleCompraData {
             ResultSet rs = ps.executeQuery();
                                    
             while (rs.next()) {
-                Producto producto = prodData.buscarProductoPorId((rs.getInt("idProducto")));
-                
-                listaProductos.add(producto);
+                Double[] datos = {rs.getDouble("idProducto") , rs.getDouble("idProveedor"), rs.getDouble("cantidad"), rs.getDouble("precioCosto")};
+                                
+                listaProductos.add(datos);
             }
             ps.close();
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al conectar con la tabla DetalleCompra");
+            JOptionPane.showMessageDialog(null, "Error al conectar con la tabla DetalleCompra" + ex);
         }
         return listaProductos;
     }
+    
     //Lista Productos por compra
-    public List<Producto> listaProductosPorCompra(int idCompra) {
+    public List<Producto> listarProductosPorCompra(int idCompra) {
         ArrayList<Producto> listaProductos = new ArrayList<>();
         
         String sql = "SELECT * FROM detallecompra WHERE idCompra = ?";
@@ -159,7 +218,7 @@ public class DetalleCompraData {
             
             ResultSet rs = ps.executeQuery();
                                    
-            if (rs.next()) {
+            while (rs.next()) {
                 Producto producto = prodData.buscarProductoPorId(rs.getInt("idProducto"));
                 
                 listaProductos.add(producto);
@@ -172,7 +231,33 @@ public class DetalleCompraData {
         return listaProductos;
     }
     //Lista productos por Proveedor
-    public List<Producto> listaProductosPorProveedor(int idProveedor) {
+    public List<DetalleCompra> listarDetalleCompraPorCompra(int idCompra) {
+        ArrayList<DetalleCompra> listaDetalleCompras = new ArrayList<>();
+        
+        String sql = "SELECT * FROM detallecompra dc JOIN compra ON dc.idCompra=compra.idCompra WHERE dc.idCompra = ?";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idCompra);
+            
+            ResultSet rs = ps.executeQuery();
+                                   
+            while (rs.next()) {
+                DetalleCompra dc = buscarDetallePorId(rs.getInt("idDetalle"));
+                
+                listaDetalleCompras.add(dc);
+            }
+            ps.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al conectar con la tabla DetalleCompra AQUI ES");
+        }
+        return listaDetalleCompras;
+    }
+    
+    //Lista productos por Proveedor
+    
+    public List<Producto> listarProductosPorProveedor(int idProveedor) {
         ArrayList<Producto> listaProductos = new ArrayList<>();
         
         String sql = "SELECT * FROM detallecompra dc JOIN compra ON dc.idCompra=compra.idCompra WHERE idProveedor = ?";
@@ -248,5 +333,31 @@ public class DetalleCompraData {
         return listaProductos;
     }
     
+     public ArrayList<Integer[]> listarMasComprados(LocalDate f1, LocalDate f2, int cantidad){
+        ArrayList<Integer []> listaProductos = new ArrayList<>();
+        
+         
+         String sql = "SELECT idProducto, SUM(cantidad) as cantidad FROM detallecompra dc Join compra ON dc.idCompra=compra.idCompra "
+                 + "WHERE compra.fecha >= ? AND compra.fecha <= ? GROUP BY dc.idProducto ORDER by cantidad DESC LIMIT ?";
+         
+         try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setDate(1, Date.valueOf(f1));
+            ps.setDate(2, Date.valueOf(f2));
+            ps.setInt(3, cantidad);
+            ResultSet rs = ps.executeQuery(); // idCOmpra idProveedor fecha
+            
+          while (rs.next()){
+              Integer [] datos = {rs.getInt("idProducto"), rs.getInt("cantidad")};
+              listaProductos.add(datos);
+          }     
+            ps.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al conectar con la tabla Producto");
+        }
+        
+        return listaProductos;
+    }
     
 }

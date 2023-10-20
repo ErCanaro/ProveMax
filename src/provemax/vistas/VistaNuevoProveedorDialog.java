@@ -5,27 +5,26 @@
  */
 package provemax.vistas;
 
-import java.awt.Frame;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
 import provemax.accesoADatos.ProductoData;
+import provemax.accesoADatos.ProveedorData;
 import provemax.entidades.Producto;
+import provemax.entidades.Proveedor;
 
 /**
  *
  * @author Enzo Bulacio
  */
-public class VistaNuevoProductoDialog extends javax.swing.JDialog {
-    private ProductoData prodData = new ProductoData();
-
+public class VistaNuevoProveedorDialog extends javax.swing.JDialog {
+    private ProveedorData provData = new ProveedorData();
+    
     
     
     /**
      * Creates new form VistaNuevoProductoDialog
      */
-    public VistaNuevoProductoDialog(java.awt.Frame parent, boolean modal) {
+    public VistaNuevoProveedorDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(parent);
@@ -45,35 +44,30 @@ public class VistaNuevoProductoDialog extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jTFNombre = new javax.swing.JTextField();
-        jTFDescripcion = new javax.swing.JTextField();
+        jTFRazonSocial = new javax.swing.JTextField();
+        jTFDomicilio = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTFPrecioActual = new javax.swing.JTextField();
+        jTFTelefono = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTFStock = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jBGuardar = new javax.swing.JButton();
         jBCancelar = new javax.swing.JButton();
         jRBEstado = new javax.swing.JRadioButton();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jTFStockMinimo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Nuevo Producto");
+        setTitle("Nuevo Proveedor");
         setAlwaysOnTop(true);
-        setPreferredSize(new java.awt.Dimension(350, 600));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Nuevo Producto");
+        jLabel1.setText("Nuevo Proveedor");
 
-        jLabel3.setText("Nombre");
+        jLabel3.setText("Razón Social");
 
-        jLabel4.setText("Descripcion");
+        jLabel4.setText("Domicilio");
 
-        jLabel5.setText("Precio Actual");
+        jLabel5.setText("Teléfono");
 
         jLabel6.setText("Estado");
 
@@ -113,10 +107,6 @@ public class VistaNuevoProductoDialog extends javax.swing.JDialog {
 
         jRBEstado.setText("Activo?");
 
-        jLabel8.setText("Stock");
-
-        jLabel9.setText("Stoc Minimo");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -124,27 +114,19 @@ public class VistaNuevoProductoDialog extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(56, 56, 56)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addComponent(jRBEstado)
                 .addGap(50, 50, 50))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTFDescripcion)
-                    .addComponent(jTFNombre)
-                    .addComponent(jLabel3)
+                    .addComponent(jTFDomicilio)
+                    .addComponent(jTFRazonSocial)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTFPrecioActual)
+                    .addComponent(jTFTelefono)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jTFStock, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTFStockMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5))
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -156,25 +138,16 @@ public class VistaNuevoProductoDialog extends javax.swing.JDialog {
                 .addGap(20, 20, 20)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTFNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTFRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTFDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTFDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTFPrecioActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTFStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTFStockMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                .addComponent(jTFTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(108, 108, 108)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRBEstado)
                     .addComponent(jLabel6))
@@ -210,7 +183,7 @@ public class VistaNuevoProductoDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
-        agregarProducto();
+        agregarProveedor();
         dispose();
     }//GEN-LAST:event_jBGuardarActionPerformed
 
@@ -235,20 +208,21 @@ public class VistaNuevoProductoDialog extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VistaNuevoProductoDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaNuevoProveedorDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VistaNuevoProductoDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaNuevoProveedorDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VistaNuevoProductoDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaNuevoProveedorDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VistaNuevoProductoDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaNuevoProveedorDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                VistaNuevoProductoDialog dialog = new VistaNuevoProductoDialog(new javax.swing.JFrame(), true);
+                VistaNuevoProveedorDialog dialog = new VistaNuevoProveedorDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -268,40 +242,31 @@ public class VistaNuevoProductoDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JRadioButton jRBEstado;
-    private javax.swing.JTextField jTFDescripcion;
-    private javax.swing.JTextField jTFNombre;
-    private javax.swing.JTextField jTFPrecioActual;
-    private javax.swing.JTextField jTFStock;
-    private javax.swing.JTextField jTFStockMinimo;
+    private javax.swing.JTextField jTFDomicilio;
+    private javax.swing.JTextField jTFRazonSocial;
+    private javax.swing.JTextField jTFTelefono;
     // End of variables declaration//GEN-END:variables
     
 
-    private void agregarProducto(){
-        Producto producto = new Producto();
+    private void agregarProveedor(){
+        Proveedor proveedor = new Proveedor();
         
-        producto.setNombre(jTFNombre.getText());
-        producto.setDescripcion(jTFDescripcion.getText());
-        producto.setPrecioActual(Double.parseDouble(jTFPrecioActual.getText()));
-        producto.setStockMinimo(Integer.parseInt(jTFStockMinimo.getText()));
-        producto.setStock(Integer.parseInt(jTFStock.getText()));
-        producto.setEstado(jRBEstado.isEnabled());
+        proveedor.setRazonSocial(jTFRazonSocial.getText());
+        proveedor.setDomicilio(jTFDomicilio.getText());
+        proveedor.setTelefono(jTFTelefono.getText());
+        proveedor.setEstado(jRBEstado.isEnabled());
         
-        prodData.altaProducto(producto);
-       
+        provData.guardarProveedor(proveedor);
     }
-
+    
     
     private void limpiarFormulario(){
-        jTFNombre.setText("");
-        jTFDescripcion.setText("");
-        jTFPrecioActual.setText("");
-        jTFStock.setText("");
-        jTFStockMinimo.setText("");
+        jTFRazonSocial.setText("");
+        jTFDomicilio.setText("");
+        jTFTelefono.setText("");
         jRBEstado.setSelected(false);
     }
 }

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import provemax.entidades.Compra;
+import provemax.entidades.Producto;
 
 /**
  *
@@ -212,5 +213,32 @@ public class CompraData {
         }
          return listaDeCompras;
      }
+    
+//    public List<Integer[]> listarMasComprados(LocalDate f1, LocalDate f2, int cantidad){
+//        ArrayList<Integer []> listaProductos = new ArrayList<>();
+//        
+//         
+//         String sql = "SELECT idProducto, SUM(cantidad) as cantidad FROM detallecompra dc Join compra ON dc.idCompra=compra.idCompra "
+//                 + "WHERE compra.fecha > ? AND compra.fecha < ? GROUP BY dc.idProducto ORDER by cantidad DESC LIMIT ?";
+//         
+//         try {
+//            PreparedStatement ps = con.prepareStatement(sql);
+//            ps.setDate(1, Date.valueOf(f1));
+//            ps.setDate(2, Date.valueOf(f2));
+//            ps.setInt(3, cantidad);
+//            ResultSet rs = ps.executeQuery(); // idCOmpra idProveedor fecha
+//            
+//          while (rs.next()){
+//              Integer [] datos = {rs.getInt("idProducto"), rs.getInt("cantidad")};
+//              listaProductos.add(datos);
+//          }     
+//            ps.close();
+//            
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "Error al conectar con la tabla Producto");
+//        }
+//        
+//        return listaProductos;
+//    }
     
 }

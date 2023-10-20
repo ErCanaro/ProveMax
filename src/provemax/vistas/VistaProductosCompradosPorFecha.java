@@ -5,14 +5,26 @@
  */
 package provemax.vistas;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import javax.swing.table.DefaultTableModel;
+import provemax.accesoADatos.CompraData;
+import provemax.accesoADatos.DetalleCompraData;
+import provemax.accesoADatos.ProductoData;
+import provemax.accesoADatos.ProveedorData;
+import provemax.entidades.Producto;
+import provemax.entidades.Proveedor;
 
 /**
  *
  * @author Enzo Bulacio
  */
 public class VistaProductosCompradosPorFecha extends javax.swing.JInternalFrame {
-
+    private DefaultTableModel modeloTabla = new DefaultTableModel();
+    private DetalleCompraData dcData = new DetalleCompraData();
+    private ProductoData prodData = new ProductoData();
+    private CompraData compraData = new CompraData();
+    private ProveedorData provData = new ProveedorData();
     /**
      * Creates new form VistaProductosCompradosPorFecha
      */
@@ -35,7 +47,9 @@ public class VistaProductosCompradosPorFecha extends javax.swing.JInternalFrame 
         jDCFecha = new com.toedter.calendar.JDateChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTProductos = new javax.swing.JTable();
+        jBBuscar = new javax.swing.JButton();
 
+        setClosable(true);
         setTitle("Productos por Fecha");
         setPreferredSize(new java.awt.Dimension(800, 600));
 
@@ -58,6 +72,13 @@ public class VistaProductosCompradosPorFecha extends javax.swing.JInternalFrame 
         ));
         jScrollPane1.setViewportView(jTProductos);
 
+        jBBuscar.setText("Buscar");
+        jBBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBBuscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -72,6 +93,8 @@ public class VistaProductosCompradosPorFecha extends javax.swing.JInternalFrame 
                         .addComponent(jLabel2)
                         .addGap(33, 33, 33)
                         .addComponent(jDCFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(jBBuscar)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -89,7 +112,8 @@ public class VistaProductosCompradosPorFecha extends javax.swing.JInternalFrame 
                     .addComponent(jDCFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(8, 8, 8)
-                        .addComponent(jLabel2)))
+                        .addComponent(jLabel2))
+                    .addComponent(jBBuscar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(64, Short.MAX_VALUE))
@@ -98,8 +122,13 @@ public class VistaProductosCompradosPorFecha extends javax.swing.JInternalFrame 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
+        cargarTablaPorFecha();
+    }//GEN-LAST:event_jBBuscarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBBuscar;
     private com.toedter.calendar.JDateChooser jDCFecha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -108,9 +137,9 @@ public class VistaProductosCompradosPorFecha extends javax.swing.JInternalFrame 
     // End of variables declaration//GEN-END:variables
     
     private void formatearTabla(){
-        DefaultTableModel modeloTabla = new DefaultTableModel();
         
-        modeloTabla.setColumnIdentifiers(new Object [] {"Código", "Nombre", "Decripción","Cantidad", "Costo", "Precio", "Stock"});
+        
+        modeloTabla.setColumnIdentifiers(new Object [] {"Código", "Nombre", "Decripción","Proveedor", "Cantidad", "Costo"});
         
         jTProductos.setModel(modeloTabla);
         
@@ -121,9 +150,47 @@ public class VistaProductosCompradosPorFecha extends javax.swing.JInternalFrame 
         jTProductos.getColumnModel().getColumn(2).setPreferredWidth(120);
         jTProductos.getColumnModel().getColumn(3).setPreferredWidth(40);
         jTProductos.getColumnModel().getColumn(4).setPreferredWidth(50);
-        jTProductos.getColumnModel().getColumn(5).setPreferredWidth(50);
-        jTProductos.getColumnModel().getColumn(6).setPreferredWidth(40);
+        jTProductos.getColumnModel().getColumn(5).setPreferredWidth(40);
         jTProductos.setDefaultEditor(Object.class, null);
     }
+    
+//    private void cargarTablaPorFecha(){
+//        
+//        LocalDate fecha = jDCFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//        
+//        for (Double[] d : dcData.listaProductosPorFecha(fecha)){
+//            
+//            int idProducto = d[0].intValue();
+//            int cantidadTotal = d[1].intValue();
+//            double costoPromedio = d[2];
+//            int stockTotal = d[3].intValue();
+//
+//            Producto p = prodData.buscarProductoPorId(idProducto);
+//            
+//            modeloTabla.addRow(new Object [] {p.getIdProducto(), p.getNombre(), p.getDescripcion(), 
+//                                cantidadTotal, costoPromedio, stockTotal});
+//        }
+//        jTProductos.setModel(modeloTabla);
+//    }
+    
+    private void cargarTablaPorFecha(){
+        modeloTabla.setRowCount(0);
+        LocalDate fecha = jDCFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        
+        for (Double[] d : dcData.listaProductosPorFecha(fecha)){
+            
+            int idProducto = d[0].intValue();
+            int idProveedor = d[1].intValue();
+            int cantidad = d[2].intValue();
+            double precioCosto = d[3];
+            
 
+            Producto p = prodData.buscarProductoPorId(idProducto);
+            Proveedor prov = provData.buscarProveedorPorId(idProveedor);
+            
+            modeloTabla.addRow(new Object [] {p.getIdProducto(), p.getNombre(), p.getDescripcion(), 
+                                prov.getRazonSocial(), cantidad, precioCosto});
+        }
+        jTProductos.setModel(modeloTabla);
+    }
 }

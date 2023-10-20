@@ -98,12 +98,15 @@ public class Producto {
         this.stockMinimo = stockMinimo;
     }
 
+//    @Override
+//    public String toString() {
+//        return "Producto{" + "idProducto=" + idProducto + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precioActual=" + precioActual + ", stock=" + stock + ", estado=" + estado + ", stockMinimo=" + stockMinimo + '}';
+//    }
+    
     @Override
     public String toString() {
-        return "Producto{" + "idProducto=" + idProducto + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precioActual=" + precioActual + ", stock=" + stock + ", estado=" + estado + ", stockMinimo=" + stockMinimo + '}';
+        return idProducto + " | " + nombre ;
     }
-    
-    
 
     
     

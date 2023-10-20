@@ -5,7 +5,14 @@
  */
 package provemax.vistas;
 
+import java.awt.Color;
+import java.awt.Image;
+import java.util.ArrayList;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JDesktopPane;
+import provemax.accesoADatos.ProductoData;
+import provemax.entidades.Producto;
 
 /**
  *
@@ -18,6 +25,7 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
+        alertaBajoStock();
     }
 
     /**
@@ -32,13 +40,18 @@ public class Main extends javax.swing.JFrame {
         jDPEscritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuProveedor = new javax.swing.JMenu();
-        jMenuItemProveedor = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        jMenuConsultas = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMIComprasPorProveedor = new javax.swing.JMenuItem();
+        jMenuProveedorPorProducto = new javax.swing.JMenuItem();
+        jMenuMasComprados = new javax.swing.JMenuItem();
+        jMenuProveedorsPorProducto = new javax.swing.JMenuItem();
+        jMenuBajoStock = new javax.swing.JMenu();
+        jMenuStockCritico = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,15 +77,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jMenuItemProveedor.setText("Proveedores...");
-        jMenuItemProveedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemProveedorActionPerformed(evt);
-            }
-        });
-        jMenuProveedor.add(jMenuItemProveedor);
-
-        jMenuItem1.setText("Proveeeeeedores...");
+        jMenuItem1.setText("Proveedores...");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -102,7 +107,12 @@ public class Main extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setText("Consultas");
+        jMenuConsultas.setText("Consultas");
+        jMenuConsultas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuConsultasActionPerformed(evt);
+            }
+        });
 
         jMenuItem4.setText("Productos Comprados por fecha");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
@@ -110,9 +120,58 @@ public class Main extends javax.swing.JFrame {
                 jMenuItem4ActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem4);
+        jMenuConsultas.add(jMenuItem4);
 
-        jMenuBar1.add(jMenu3);
+        jMIComprasPorProveedor.setText("Compras por Proveedor...");
+        jMIComprasPorProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIComprasPorProveedorActionPerformed(evt);
+            }
+        });
+        jMenuConsultas.add(jMIComprasPorProveedor);
+
+        jMenuProveedorPorProducto.setText("Productos por Compras...");
+        jMenuProveedorPorProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuProveedorPorProductoActionPerformed(evt);
+            }
+        });
+        jMenuConsultas.add(jMenuProveedorPorProducto);
+
+        jMenuMasComprados.setText("Más Comprados...");
+        jMenuMasComprados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuMasCompradosActionPerformed(evt);
+            }
+        });
+        jMenuConsultas.add(jMenuMasComprados);
+
+        jMenuProveedorsPorProducto.setText("Proveedores por Producto...");
+        jMenuProveedorsPorProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuProveedorsPorProductoActionPerformed(evt);
+            }
+        });
+        jMenuConsultas.add(jMenuProveedorsPorProducto);
+
+        jMenuBar1.add(jMenuConsultas);
+
+        jMenuBajoStock.setText("Productos con bajo Stock");
+        jMenuBajoStock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuBajoStockActionPerformed(evt);
+            }
+        });
+
+        jMenuStockCritico.setText("Stock crítico...");
+        jMenuStockCritico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuStockCriticoActionPerformed(evt);
+            }
+        });
+        jMenuBajoStock.add(jMenuStockCritico);
+
+        jMenuBar1.add(jMenuBajoStock);
 
         setJMenuBar(jMenuBar1);
 
@@ -134,15 +193,6 @@ public class Main extends javax.swing.JFrame {
     private void jMenuProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuProveedorActionPerformed
        
     }//GEN-LAST:event_jMenuProveedorActionPerformed
-
-    private void jMenuItemProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemProveedorActionPerformed
-       jDPEscritorio.removeAll();
-       jDPEscritorio.repaint();
-       VistaProveedor vp = new VistaProveedor();
-       vp.setVisible(true);
-       jDPEscritorio.add(vp);
-       jDPEscritorio.moveToFront(vp);
-    }//GEN-LAST:event_jMenuItemProveedorActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
        jDPEscritorio.removeAll();
@@ -179,6 +229,64 @@ public class Main extends javax.swing.JFrame {
        jDPEscritorio.add(vpcpf);
        jDPEscritorio.moveToFront(vpcpf);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConsultasActionPerformed
+       
+    }//GEN-LAST:event_jMenuConsultasActionPerformed
+
+    private void jMIComprasPorProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIComprasPorProveedorActionPerformed
+       jDPEscritorio.removeAll();
+       jDPEscritorio.repaint();
+       VistaComprasPorProveedor vcpp = new VistaComprasPorProveedor();
+       vcpp.setVisible(true);
+       jDPEscritorio.add(vcpp);
+       jDPEscritorio.moveToFront(vcpp);
+    }//GEN-LAST:event_jMIComprasPorProveedorActionPerformed
+
+    private void jMenuMasCompradosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuMasCompradosActionPerformed
+       jDPEscritorio.removeAll();
+       jDPEscritorio.repaint();
+       VistaMasComprados vmc = new VistaMasComprados();
+       vmc.setVisible(true);
+       jDPEscritorio.add(vmc);
+       jDPEscritorio.moveToFront(vmc);
+    }//GEN-LAST:event_jMenuMasCompradosActionPerformed
+
+    private void jMenuProveedorPorProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuProveedorPorProductoActionPerformed
+       jDPEscritorio.removeAll();
+       jDPEscritorio.repaint();
+       VistaProductosPorCompra ppc = new VistaProductosPorCompra();
+       ppc.setVisible(true);
+       jDPEscritorio.add(ppc);
+       jDPEscritorio.moveToFront(ppc);
+    }//GEN-LAST:event_jMenuProveedorPorProductoActionPerformed
+
+    private void jMenuProveedorsPorProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuProveedorsPorProductoActionPerformed
+       jDPEscritorio.removeAll();
+       jDPEscritorio.repaint();
+       VistaProveedoresPorProducto ppp = new VistaProveedoresPorProducto();
+       ppp.setVisible(true);
+       jDPEscritorio.add(ppp);
+       jDPEscritorio.moveToFront(ppp);
+    }//GEN-LAST:event_jMenuProveedorsPorProductoActionPerformed
+
+    private void jMenuStockCriticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuStockCriticoActionPerformed
+       jDPEscritorio.removeAll();
+       jDPEscritorio.repaint();
+       VistaProductosConStockBajo pcbs = new VistaProductosConStockBajo();
+       pcbs.setVisible(true);
+       jDPEscritorio.add(pcbs);
+       jDPEscritorio.moveToFront(pcbs);
+    }//GEN-LAST:event_jMenuStockCriticoActionPerformed
+
+    private void jMenuBajoStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuBajoStockActionPerformed
+       jDPEscritorio.removeAll();
+       jDPEscritorio.repaint();
+       VistaProductosConStockBajo pcbs = new VistaProductosConStockBajo();
+       pcbs.setVisible(true);
+       jDPEscritorio.add(pcbs);
+       jDPEscritorio.moveToFront(pcbs);
+    }//GEN-LAST:event_jMenuBajoStockActionPerformed
 
     /**
      * @param args the command line arguments
@@ -223,19 +331,41 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDPEscritorio;
+    private javax.swing.JMenuItem jMIComprasPorProveedor;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
+    private static javax.swing.JMenu jMenuBajoStock;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuConsultas;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItemProveedor;
+    private javax.swing.JMenuItem jMenuMasComprados;
     private javax.swing.JMenu jMenuProveedor;
+    private javax.swing.JMenuItem jMenuProveedorPorProducto;
+    private javax.swing.JMenuItem jMenuProveedorsPorProducto;
+    private javax.swing.JMenuItem jMenuStockCritico;
     // End of variables declaration//GEN-END:variables
 
     public JDesktopPane getjDPEscritorio() {
         return jDPEscritorio;
     }
     
+    private void alertaBajoStock() {
+        ProductoData prodData = new ProductoData();
+
+        for (Producto p : prodData.listaProductos()) {
+            if (p.getStock() <= p.getStockMinimo()) {
+                jMenuBajoStock.setBackground(Color.red);
+                jMenuBajoStock.setForeground(Color.red);
+
+                Image imagen = new ImageIcon(getClass().getResource("/img/alert.png")).getImage().getScaledInstance(10, 10, java.awt.Image.SCALE_SMOOTH);
+                ImageIcon icono = new ImageIcon(imagen);
+                jMenuBajoStock.setIcon(icono);
+
+            }
+
+        }
+    }
+
 }
