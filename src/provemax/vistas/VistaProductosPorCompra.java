@@ -71,6 +71,7 @@ public class VistaProductosPorCompra extends javax.swing.JInternalFrame {
         jTDetalleComprasTotal = new javax.swing.JTable();
 
         setClosable(true);
+        setTitle("Productos por Compra");
         setPreferredSize(new java.awt.Dimension(800, 600));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N

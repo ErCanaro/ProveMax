@@ -74,8 +74,10 @@ public class VistaComprasPorProveedor extends javax.swing.JInternalFrame {
         jTDetalleComprasTotal = new javax.swing.JTable();
 
         setClosable(true);
+        setTitle("Compras por Proveedor");
         setPreferredSize(new java.awt.Dimension(800, 600));
 
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Compras por Proveedor");
 

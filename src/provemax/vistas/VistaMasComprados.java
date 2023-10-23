@@ -5,9 +5,13 @@
  */
 package provemax.vistas;
 
+import java.awt.Image;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import provemax.accesoADatos.DetalleCompraData;
 import provemax.accesoADatos.ProductoData;
@@ -26,6 +30,7 @@ public class VistaMasComprados extends javax.swing.JInternalFrame {
      */
     public VistaMasComprados() {
         initComponents();
+        cargarIconosAbotnoes();
         inicializarTabla();
     }
 
@@ -68,6 +73,12 @@ public class VistaMasComprados extends javax.swing.JInternalFrame {
             }
         });
 
+        jTFCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFCantidadKeyTyped(evt);
+            }
+        });
+
         jLabel2.setText("Cantidad");
 
         jTProductos.setModel(new javax.swing.table.DefaultTableModel(
@@ -99,11 +110,12 @@ public class VistaMasComprados extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(61, 61, 61)
+                .addGap(58, 58, 58)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTFCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -116,8 +128,8 @@ public class VistaMasComprados extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jDCFin, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(53, Short.MAX_VALUE))
+                        .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,22 +138,22 @@ public class VistaMasComprados extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(jLabel4)
                             .addComponent(jLabel3)
                             .addComponent(jLabel2)
                             .addComponent(jDCFin, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGap(21, 21, 21)
                         .addComponent(jTFCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jDCInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                        .addGap(21, 21, 21)
+                        .addComponent(jDCInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41))
         );
@@ -161,6 +173,13 @@ public class VistaMasComprados extends javax.swing.JInternalFrame {
         cargarTabla();
     }//GEN-LAST:event_jBBuscarActionPerformed
 
+    private void jTFCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFCantidadKeyTyped
+         String str = jTFCantidad.getText() + evt.getKeyChar();
+                if (!str.matches("\\d{0,2}")) {
+                    evt.consume();
+                }
+    }//GEN-LAST:event_jTFCantidadKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBBuscar;
@@ -175,6 +194,18 @@ public class VistaMasComprados extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTProductos;
     // End of variables declaration//GEN-END:variables
 
+     private void asignarIconoABoton (String  ruta, JButton boton){
+        Image imagen = new ImageIcon(getClass().getResource(ruta)).getImage().getScaledInstance(22, 22, java.awt.Image.SCALE_SMOOTH);
+        ImageIcon icono = new ImageIcon(imagen);
+
+        boton.setIcon(icono);
+    }
+    
+    private void cargarIconosAbotnoes() {
+       asignarIconoABoton("/img/search.png", jBBuscar);
+       ;
+    }
+    
     private void inicializarTabla(){
         modeloTabla.setColumnIdentifiers(new Object [] {"Código", "Nombre", "Descripción", "Cantidad"});
         
@@ -191,16 +222,25 @@ public class VistaMasComprados extends javax.swing.JInternalFrame {
          jTProductos.setDefaultEditor(Object.class, null);
     }
 
-    private void cargarTabla(){
-        modeloTabla.setRowCount(0);
-        LocalDate inicio = jDCInicio.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        LocalDate fin = jDCFin.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        
-        ArrayList<Integer[]> datos = dcData.listarMasComprados(inicio, fin, Integer.parseInt(jTFCantidad.getText()));
-        
-        for(Integer[] d : datos) {
-            Producto p = prodData.buscarProductoPorId(d[0].intValue());
-            modeloTabla.addRow(new Object [] {p.getIdProducto(), p.getNombre(), p.getDescripcion(), d[1].intValue(),p.getStock()});
+    private void cargarTabla() {
+
+        if (jDCInicio.getDate() != null || jDCFin.getDate() != null) {
+            modeloTabla.setRowCount(0);
+            LocalDate inicio = jDCInicio.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate fin = jDCFin.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+            if (jTFCantidad.getText().isEmpty()) {
+                jTFCantidad.setText("10");
+            }
+
+            ArrayList<Integer[]> datos = dcData.listarMasComprados(inicio, fin, Integer.parseInt(jTFCantidad.getText()));
+
+            for (Integer[] d : datos) {
+                Producto p = prodData.buscarProductoPorId(d[0].intValue());
+                modeloTabla.addRow(new Object[]{p.getIdProducto(), p.getNombre(), p.getDescripcion(), d[1].intValue(), p.getStock()});
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "No debe haber campos vacíos");
         }
     }
 }

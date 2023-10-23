@@ -177,7 +177,7 @@
                       <Component id="jRBEstado" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="74" max="32767" attributes="0"/>
+                  <EmptySpace pref="54" max="32767" attributes="0"/>
                   <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               </Group>
@@ -249,11 +249,11 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                      <Component id="jBNuevo" min="-2" max="-2" attributes="0"/>
+                      <Component id="jBNuevo" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jBGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jBCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jBGuardar" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="jBCancelar" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -368,9 +368,9 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jBDesactivar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jBActivar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jBEditar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jBDesactivar" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="jBActivar" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="jBEditar" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="20" max="32767" attributes="0"/>
                   </Group>

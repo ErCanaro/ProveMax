@@ -38,6 +38,8 @@ public class Main extends javax.swing.JFrame {
     private void initComponents() {
 
         jDPEscritorio = new javax.swing.JDesktopPane();
+        jLabel1 = new javax.swing.JLabel();
+        jLLogo = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuProveedor = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -57,15 +59,36 @@ public class Main extends javax.swing.JFrame {
 
         jDPEscritorio.setPreferredSize(new java.awt.Dimension(800, 600));
 
+        jLabel1.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel1.setFont(new java.awt.Font("Gadugi", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel1.setText("Prove Max S.R.L.   ");
+        jLabel1.setOpaque(true);
+
+        jLLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        jDPEscritorio.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDPEscritorio.setLayer(jLLogo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout jDPEscritorioLayout = new javax.swing.GroupLayout(jDPEscritorio);
         jDPEscritorio.setLayout(jDPEscritorioLayout);
         jDPEscritorioLayout.setHorizontalGroup(
             jDPEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDPEscritorioLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(71, 71, 71))
         );
         jDPEscritorioLayout.setVerticalGroup(
             jDPEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addGroup(jDPEscritorioLayout.createSequentialGroup()
+                .addContainerGap(409, Short.MAX_VALUE)
+                .addComponent(jLLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
 
         jMenuBar1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -331,6 +354,8 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDPEscritorio;
+    private javax.swing.JLabel jLLogo;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jMIComprasPorProveedor;
     private javax.swing.JMenu jMenu2;
     private static javax.swing.JMenu jMenuBajoStock;
@@ -362,6 +387,11 @@ public class Main extends javax.swing.JFrame {
                 Image imagen = new ImageIcon(getClass().getResource("/img/alert.png")).getImage().getScaledInstance(10, 10, java.awt.Image.SCALE_SMOOTH);
                 ImageIcon icono = new ImageIcon(imagen);
                 jMenuBajoStock.setIcon(icono);
+                
+                
+                Image imagen2 = new ImageIcon(getClass().getResource("/img/inventory.png")).getImage().getScaledInstance(80, 80, java.awt.Image.SCALE_SMOOTH);
+                ImageIcon logo = new ImageIcon(imagen2);
+                jLabel1.setIcon(logo);
 
             }
 

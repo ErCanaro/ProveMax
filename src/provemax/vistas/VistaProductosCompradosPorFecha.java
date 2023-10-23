@@ -5,8 +5,11 @@
  */
 package provemax.vistas;
 
+import java.awt.Image;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 import provemax.accesoADatos.CompraData;
 import provemax.accesoADatos.DetalleCompraData;
@@ -30,7 +33,9 @@ public class VistaProductosCompradosPorFecha extends javax.swing.JInternalFrame 
      */
     public VistaProductosCompradosPorFecha() {
         initComponents();
+        cargarIconosAbotnoes();
         formatearTabla();
+        
     }
 
     /**
@@ -94,7 +99,7 @@ public class VistaProductosCompradosPorFecha extends javax.swing.JInternalFrame 
                         .addGap(33, 33, 33)
                         .addComponent(jDCFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32)
-                        .addComponent(jBBuscar)
+                        .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -135,6 +140,20 @@ public class VistaProductosCompradosPorFecha extends javax.swing.JInternalFrame 
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTProductos;
     // End of variables declaration//GEN-END:variables
+    
+     private void asignarIconoABoton (String  ruta, JButton boton){
+        Image imagen = new ImageIcon(getClass().getResource(ruta)).getImage().getScaledInstance(22, 22, java.awt.Image.SCALE_SMOOTH);
+        ImageIcon icono = new ImageIcon(imagen);
+
+        boton.setIcon(icono);
+    }
+    
+    private void cargarIconosAbotnoes() {
+       asignarIconoABoton("/img/search.png", jBBuscar);
+       ;
+    }
+    
+    
     
     private void formatearTabla(){
         

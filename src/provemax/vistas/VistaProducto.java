@@ -160,11 +160,11 @@ public class VistaProducto extends javax.swing.JInternalFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(jBNuevo)
+                .addComponent(jBNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBGuardar)
-                    .addComponent(jBCancelar))
+                    .addComponent(jBGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -249,7 +249,7 @@ public class VistaProducto extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRBEstado)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
@@ -294,9 +294,9 @@ public class VistaProducto extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBDesactivar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBActivar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBEditar))
+                    .addComponent(jBDesactivar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBActivar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -405,7 +405,7 @@ public class VistaProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTFBusquedaKeyTyped
 
     private void jTFBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFBusquedaKeyReleased
-        filtrarProductosPorBusqueda(evt);
+        filtrarProductosPorBusqueda();
     }//GEN-LAST:event_jTFBusquedaKeyReleased
 
     private void jTProductosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTProductosKeyReleased
@@ -475,6 +475,7 @@ public class VistaProducto extends javax.swing.JInternalFrame {
             int fila = jTProductos.getSelectedRow();
             modificarProducto();
             actualizarListaProductos();
+            filtrarProductosPorBusqueda();
             jTProductos.requestFocus();
             jTProductos.getSelectionModel().setSelectionInterval(fila, fila);
             ocultarMostrarBotonesBusquda();
@@ -592,7 +593,7 @@ public class VistaProducto extends javax.swing.JInternalFrame {
     }
     
     /////////////////////////////////////////// ADAPTANTDO A PRODUCTO //////////////////////////////////////////////////
-    private void filtrarProductosPorBusqueda(java.awt.event.KeyEvent evt){
+    private void filtrarProductosPorBusqueda(){
         modeloTabla.setRowCount(0);
         for (Producto p : listaProductos) {
             if (p.getNombre().toLowerCase().contains(jTFBusqueda.getText().toLowerCase())
