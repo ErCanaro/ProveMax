@@ -7,6 +7,7 @@ package provemax.vistas;
 
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import provemax.accesoADatos.ProductoData;
 import provemax.accesoADatos.ProveedorData;
 import provemax.entidades.Producto;
@@ -184,7 +185,7 @@ public class VistaNuevoProveedorDialog extends javax.swing.JDialog {
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
         agregarProveedor();
-        dispose();
+//        dispose();
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarActionPerformed
@@ -252,14 +253,20 @@ public class VistaNuevoProveedorDialog extends javax.swing.JDialog {
     
 
     private void agregarProveedor(){
-        Proveedor proveedor = new Proveedor();
         
-        proveedor.setRazonSocial(jTFRazonSocial.getText());
-        proveedor.setDomicilio(jTFDomicilio.getText());
-        proveedor.setTelefono(jTFTelefono.getText());
-        proveedor.setEstado(jRBEstado.isEnabled());
-        
-        provData.guardarProveedor(proveedor);
+        if (!(jTFRazonSocial.getText().isEmpty() || jTFDomicilio.getText().isEmpty() || jTFTelefono.getText().isEmpty())) {
+
+            Proveedor proveedor = new Proveedor();
+
+            proveedor.setRazonSocial(jTFRazonSocial.getText());
+            proveedor.setDomicilio(jTFDomicilio.getText());
+            proveedor.setTelefono(jTFTelefono.getText());
+            proveedor.setEstado(jRBEstado.isEnabled());
+            dispose();
+            provData.guardarProveedor(proveedor);
+        } else {
+            JOptionPane.showMessageDialog(this, "No debe haber campos vacíos");
+        }
     }
     
     

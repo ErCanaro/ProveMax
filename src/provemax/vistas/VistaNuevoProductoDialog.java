@@ -9,6 +9,7 @@ import java.awt.Frame;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import provemax.accesoADatos.ProductoData;
 import provemax.entidades.Producto;
@@ -211,7 +212,7 @@ public class VistaNuevoProductoDialog extends javax.swing.JDialog {
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
         agregarProducto();
-        dispose();
+//        dispose();
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarActionPerformed
@@ -282,17 +283,23 @@ public class VistaNuevoProductoDialog extends javax.swing.JDialog {
     
 
     private void agregarProducto(){
-        Producto producto = new Producto();
         
-        producto.setNombre(jTFNombre.getText());
-        producto.setDescripcion(jTFDescripcion.getText());
-        producto.setPrecioActual(Double.parseDouble(jTFPrecioActual.getText()));
-        producto.setStockMinimo(Integer.parseInt(jTFStockMinimo.getText()));
-        producto.setStock(Integer.parseInt(jTFStock.getText()));
-        producto.setEstado(jRBEstado.isEnabled());
+        if (!(jTFNombre.getText().isEmpty() || jTFDescripcion.getText().isEmpty()
+                || jTFStock.getText().isEmpty() || jTFStockMinimo.getText().isEmpty() || jTFPrecioActual.getText().isEmpty())) {
+            Producto producto = new Producto();
+
+            producto.setNombre(jTFNombre.getText());
+            producto.setDescripcion(jTFDescripcion.getText());
+            producto.setPrecioActual(Double.parseDouble(jTFPrecioActual.getText()));
+            producto.setStockMinimo(Integer.parseInt(jTFStockMinimo.getText()));
+            producto.setStock(Integer.parseInt(jTFStock.getText()));
+            producto.setEstado(jRBEstado.isEnabled());
+            dispose();
+            prodData.altaProducto(producto);
+        } else {
+            JOptionPane.showMessageDialog(this, "No debe haber campos vacíos");
+        }
         
-        prodData.altaProducto(producto);
-       
     }
 
     

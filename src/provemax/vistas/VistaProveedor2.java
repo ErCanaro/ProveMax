@@ -427,16 +427,24 @@ public class VistaProveedor2 extends javax.swing.JInternalFrame {
         estadoFormulario(false);
         jTFBusqueda.requestFocus();
         jTFBusqueda.setText("");
+        jTProveedores.setRowSelectionInterval(1, 1);
         inicializarTabla();
         jBNuevo.setEnabled(true);
+        jBModificar.setEnabled(false);
+        jBBorrar.setEnabled(false);
+        jBRestaurar.setEnabled(false);
     }//GEN-LAST:event_jBCancelarActionPerformed
 
     private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
-        estadoBusqueda(false);
-        estadoFormulario(true);
-        jBNuevo.setEnabled(false);
-        jTFRazonSocial.requestFocus();
-                
+        if (jTProveedores.getSelectedRow() != -1) {
+            estadoBusqueda(false);
+            estadoFormulario(true);
+            jBNuevo.setEnabled(false);
+            jTFRazonSocial.requestFocus();
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un provedor");
+        }
+   
     }//GEN-LAST:event_jBModificarActionPerformed
 
     private void jTProveedoresPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTProveedoresPropertyChange
@@ -452,24 +460,31 @@ public class VistaProveedor2 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTProveedoresFocusGained
 
     private void jBBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBorrarActionPerformed
-        int idProveedor = (int) jTProveedores.getValueAt(jTProveedores.getSelectedRow(), 0);
-        int fila = jTProveedores.getSelectedRow();
-        provData.borrarProveedor(idProveedor);
-        actualizarListaProveedores();
-        jTProveedores.requestFocus();
-        jTProveedores.getSelectionModel().setSelectionInterval(fila, fila);
-        cargarFormularioAlSeleccionarFila();
-        
+        if (jTProveedores.getSelectedRow() != -1) {
+            int idProveedor = (int) jTProveedores.getValueAt(jTProveedores.getSelectedRow(), 0);
+            int fila = jTProveedores.getSelectedRow();
+            provData.borrarProveedor(idProveedor);
+            actualizarListaProveedores();
+            jTProveedores.requestFocus();
+            jTProveedores.getSelectionModel().setSelectionInterval(fila, fila);
+            cargarFormularioAlSeleccionarFila();
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un provedor");
+        }
     }//GEN-LAST:event_jBBorrarActionPerformed
 
     private void jBRestaurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRestaurarActionPerformed
-        int idProveedor = (int) jTProveedores.getValueAt(jTProveedores.getSelectedRow(), 0);
+         if (jTProveedores.getSelectedRow() != -1) {
+           int idProveedor = (int) jTProveedores.getValueAt(jTProveedores.getSelectedRow(), 0);
         int fila = jTProveedores.getSelectedRow();
         provData.restaurarProveedor(idProveedor);
         actualizarListaProveedores();
         jTProveedores.requestFocus();
         jTProveedores.getSelectionModel().setSelectionInterval(fila, fila);
         cargarFormularioAlSeleccionarFila();
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un provedor");
+        }        
     }//GEN-LAST:event_jBRestaurarActionPerformed
 
     private void jTProveedoresMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTProveedoresMouseReleased

@@ -7,10 +7,10 @@ package provemax.vistas;
 
 import java.awt.Color;
 import java.awt.Image;
-import java.util.ArrayList;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JDesktopPane;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 import provemax.accesoADatos.ProductoData;
 import provemax.entidades.Producto;
 
@@ -26,6 +26,7 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
         alertaBajoStock();
+        cargarLogo();
     }
 
     /**
@@ -227,12 +228,19 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-       jDPEscritorio.removeAll();
-       jDPEscritorio.repaint();
-       VistaProducto vp = new VistaProducto();
-       vp.setVisible(true);
-       jDPEscritorio.add(vp);
-       jDPEscritorio.moveToFront(vp);
+        jDPEscritorio.removeAll();
+        jDPEscritorio.repaint();
+        VistaProducto vp = new VistaProducto();
+
+        vp.addInternalFrameListener(new InternalFrameAdapter() {
+            public void internalFrameClosed(InternalFrameEvent e) {
+                 alertaBajoStock();
+            }
+        });
+
+        vp.setVisible(true);
+        jDPEscritorio.add(vp);
+        jDPEscritorio.moveToFront(vp);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -387,15 +395,20 @@ public class Main extends javax.swing.JFrame {
                 Image imagen = new ImageIcon(getClass().getResource("/img/alert.png")).getImage().getScaledInstance(10, 10, java.awt.Image.SCALE_SMOOTH);
                 ImageIcon icono = new ImageIcon(imagen);
                 jMenuBajoStock.setIcon(icono);
-                
-                
-                Image imagen2 = new ImageIcon(getClass().getResource("/img/inventory.png")).getImage().getScaledInstance(80, 80, java.awt.Image.SCALE_SMOOTH);
-                ImageIcon logo = new ImageIcon(imagen2);
-                jLabel1.setIcon(logo);
-
+                return;
+            }else {
+                jMenuBajoStock.setForeground(Color.black);
+                jMenuBajoStock.setIcon(null);
             }
 
         }
     }
-
+    
+    private void cargarLogo(){
+        Image imagen2 = new ImageIcon(getClass().getResource("/img/inventory.png")).getImage().getScaledInstance(80, 80, java.awt.Image.SCALE_SMOOTH);
+        ImageIcon logo = new ImageIcon(imagen2);
+        jLabel1.setIcon(logo);
+    }
+    
+    
 }

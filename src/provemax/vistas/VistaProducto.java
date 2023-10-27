@@ -419,10 +419,14 @@ public class VistaProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTProductosMouseReleased
 
     private void jBEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditarActionPerformed
-        estadoBusqueda(false);
-        estadoFormulario(true);
-        jBNuevo.setEnabled(false);
-        jTFNombre.requestFocus();
+        if (jTProductos.getSelectedRow() != -1) {
+            estadoBusqueda(false);
+            estadoFormulario(true);
+            jBNuevo.setEnabled(false);
+            jTFNombre.requestFocus();
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un producto");
+        }
     }//GEN-LAST:event_jBEditarActionPerformed
 
     private void jBNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoActionPerformed
@@ -442,26 +446,38 @@ public class VistaProducto extends javax.swing.JInternalFrame {
         inicializarTabla();
         jBNuevo.setEnabled(true);
         jTFIdProducto.setEnabled(true);
+        jBEditar.setEnabled(false);
+        jBActivar.setEnabled(false);
+        jBDesactivar.setEnabled(false);
     }//GEN-LAST:event_jBCancelarActionPerformed
 
     private void jBActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBActivarActionPerformed
-        int idProveedor = (int) jTProductos.getValueAt(jTProductos.getSelectedRow(), 0);
+        if (jTProductos.getSelectedRow() != -1) {
+           int idProveedor = (int) jTProductos.getValueAt(jTProductos.getSelectedRow(), 0);
         int fila = jTProductos.getSelectedRow();
         prodData.restaurarProducto(idProveedor);
         actualizarListaProductos();
         jTProductos.requestFocus();
         jTProductos.getSelectionModel().setSelectionInterval(fila, fila);
         cargarFormularioAlSeleccionarFila();
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un producto");
+        }
     }//GEN-LAST:event_jBActivarActionPerformed
 
     private void jBDesactivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDesactivarActionPerformed
-        int idProveedor = (int) jTProductos.getValueAt(jTProductos.getSelectedRow(), 0);
-        int fila = jTProductos.getSelectedRow();
-        prodData.bajaProducto(idProveedor);
-        actualizarListaProductos();
-        jTProductos.requestFocus();
-        jTProductos.getSelectionModel().setSelectionInterval(fila, fila);
-        cargarFormularioAlSeleccionarFila();
+        if (jTProductos.getSelectedRow() != -1) {
+            int idProveedor = (int) jTProductos.getValueAt(jTProductos.getSelectedRow(), 0);
+            int fila = jTProductos.getSelectedRow();
+            prodData.bajaProducto(idProveedor);
+            actualizarListaProductos();
+            jTProductos.requestFocus();
+            jTProductos.getSelectionModel().setSelectionInterval(fila, fila);
+            cargarFormularioAlSeleccionarFila();
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un producto");
+        }
+       
     }//GEN-LAST:event_jBDesactivarActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
