@@ -299,7 +299,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel9">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Stoc Minimo"/>
+            <Property name="text" type="java.lang.String" value="Stock Minimo"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTFStockMinimo">

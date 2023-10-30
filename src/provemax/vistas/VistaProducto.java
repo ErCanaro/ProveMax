@@ -172,7 +172,7 @@ public class VistaProducto extends javax.swing.JInternalFrame {
 
         jLabel8.setText("Stock");
 
-        jLabel9.setText("Stoc Minimo");
+        jLabel9.setText("Stock Minimo");
 
         jTFStockMinimo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {

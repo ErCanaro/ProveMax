@@ -424,7 +424,9 @@ public class VistaCompra extends javax.swing.JInternalFrame {
     
     private void cargarCBProveedores(){
         listaProveedores = new ArrayList<>(provData.listarProveedores());
+        modeloCBProveedores.removeAllElements();
         for (Proveedor p : listaProveedores){
+            
             modeloCBProveedores.addElement(p);
         }
         jCBProveedor.setModel(modeloCBProveedores);
@@ -435,7 +437,9 @@ public class VistaCompra extends javax.swing.JInternalFrame {
     }
     
     private void cargarCBPrductos(){
+        
         listaProductos = new ArrayList<>(prodData.listaProductos());
+        modeloCBProductos.removeAllElements();
         for (Producto p : listaProductos){
             modeloCBProductos.addElement(p);
         }
